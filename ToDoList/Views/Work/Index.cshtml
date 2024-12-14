@@ -1,0 +1,146 @@
+﻿@using ToDoList.Model.Models
+@model IEnumerable<Work>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-name-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card">
+                    <div class="card-body p-5">
+                        <form id="createForm" class="d-flex justify-name-center align-items-center mb-4">
+
+                            <div data-mdb-input-init class="col-md-10 form-outline flex-fill">
+                                <label class="form-label" for="form2">کار جدید</label>
+                                <input type="text" id="form2" name="name" placeholder=" کار جدید.." class="form-control" required />
+                                
+                            </div>
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="col-md-2 btn btn-info ms-2">افزودن</button>
+                        </form>
+    
+                      
+                        <!-- Tabs navs -->
+                        <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="ex1-tab-1" data-mdb-tab-init href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">همه</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="ex1-tab-2" data-mdb-tab-init href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">فعال</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" id="ex1-tab-3" data-mdb-tab-init href="#ex1-tabs-3" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">تکمیل شده</a>
+                            </li>
+                        </ul>
+                        <!-- Tabs navs -->
+                        <!-- Tabs name -->
+                        <div class="tab-name" id="ex1-name">
+                            <!-- All Tasks -->
+                            <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                                <ul class="list-group mb-0" id="allTasks">
+                                    @foreach (var item in Model)
+                                    {
+                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
+                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." @(item.IsActive ? "checked" : "") />
+                                            <s>@(item.IsActive ? "" : item.Name)</s> @item.Name - @item.Date
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <!-- Active Tasks -->
+                            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                                <ul class="list-group mb-0" id="activeTasks">
+                                    @foreach (var item in Model.Where(t => t.IsActive))
+                                    {
+                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
+                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked /> @item.Name - @item.Date
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <!-- Completed Tasks -->
+                            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+                                <ul class="list-group mb-0" id="completedTasks">
+                                    @foreach (var item in Model.Where(t => !t.IsActive))
+                                    {
+                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
+                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
+                                            <s>@item.Name</s> - @item.Date
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Tabs name -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts
+    {
+
+  
+
+    <script>
+        $(document).ready(function () {
+            $('#createForm').on('submit', function (e) {
+                e.preventDefault();
+
+                var name = $('#form2').val();
+                var date = $('#formDate').val();
+
+                $.ajax({
+                    url: '@Url.Action("Create", "Work")',
+                    type: 'POST',
+                    data: {
+                        name: name,
+                        date: date
+                    },
+                    success: function (response) {
+                        // Add the new task to the list
+                        var newTask = '<li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">' +
+                            '<input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />' +
+                            '<s></s>' + name + ' - ' + date +
+                            '</li>';
+
+                        $('#allTasks').append(newTask);
+
+                        // Clear the form fields
+                        $('#form2').val('');
+                        $('#formDate').val('');
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        function myDelete(id) {
+            swal({
+                title: "تأیید حذف",
+                text: "آیا از حذف این مقدار اطمینان دارید؟",
+                icon: "warning",
+                buttons: ['لغو', 'بلی'],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.open('/Work/Delete/' + id, '_parent');
+                    }
+                });
+        }
+    </script>
+}
+
+

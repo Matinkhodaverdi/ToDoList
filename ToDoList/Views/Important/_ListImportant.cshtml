@@ -1,0 +1,27 @@
+﻿@using ToDoList.Model.Models
+@model IEnumerable<Important>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td width="10%">
+            <input type="checkbox" @(item.IsActive ? "checked" : "") />
+        </td>
+        <td width="60%">
+            @item.Name
+        </td>
+        <td width="20%">
+            @item.Date
+        </td>
+       
+        <td width="20%">
+            <a href="/Important/Edit/@item.Id" class="btn btn-xs btn-outline-warning">
+                <i class="fa fa-edit"></i>
+            </a>
+            <a href="#" onclick="myDelete('@item.Id')" class="btn btn-xs btn-outline-danger">
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+
+    </tr>
+}

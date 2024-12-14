@@ -1,0 +1,57 @@
+﻿@using ToDoList.Model.Models
+@model Work
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* <h2> ثبت کار جدید</h2>
+
+<div class="row">
+    <div class="col-md-12 col-md-offset-2">
+        <div class="card">
+            
+            <div class="clearfix"></div>
+            <div class="content">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                   
+                    <div class="form-group">
+                        <label asp-for="Name" class=""></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                   
+                    <div class="form-group">
+                        <label asp-for="Date" class=""></label>
+                        <input asp-for="Date" class="form-control" id="Date" onclick="PersianDatePicker.Show(this, this.value)" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="IsActive" class="control-label"></label>
+                        <input asp-for="IsActive" type="checkbox" />
+
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Star" class="star-label">
+                            <input asp-for="Star" type="checkbox" class="star-input" />
+                            <i class="nav-icon fas fa-star star-icon"></i>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="ثبت و بازگشت" class="btn btn-info btn-fill" />
+                        <a href="/Work/Index" class="btn btn-danger">
+                            بازگشت
+                        </a>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+ *@

@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using ToDoList.Model.Models
+
+@inject SignInManager<Users> SignInManager;
+
+
+<ul class="navbar-nav ms-auto">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">خروج</a>
+        </li>
+       
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">ورود</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">ثبت نام</a>
+        </li>
+    }
+</ul>
+

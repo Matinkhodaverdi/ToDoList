@@ -1,0 +1,12 @@
+﻿.star-input {
+    display: none; 
+}
+
+.star-icon {
+    color: yellow;
+    cursor: pointer; 
+}
+
+.star-input:checked + .star-icon {
+    color: yellow; 
+}
