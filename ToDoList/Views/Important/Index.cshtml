@@ -1,125 +1,136 @@
-﻿@using ToDoList.Model.Models
+﻿ @using ToDoList.Model.Models
 @model IEnumerable<Important>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col col-xl-10">
-                <div class="card">
-                    <div class="card-body p-5">
-                        <form id="createForm" class="d-flex justify-content-center align-items-center mb-4">
-
-                            <div data-mdb-input-init class="col-md-10 form-outline flex-fill">
-                                <label class="form-label" for="form2">کار مهم جدید</label>
-                                <input type="text" id="form2" name="name" placeholder=" کار مهم جدید.." class="form-control" required />
-
-                            </div>
-                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="col-md-2 btn btn-info ms-2">افزودن</button>
-                        </form>
 
 
-                       @*  <!-- Tabs navs -->
-                        <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" id="ex1-tab-1" data-mdb-tab-init href="#ex1-tabs-1" role="tab" aria-controls="ex1-tabs-1" aria-selected="true">همه</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="ex1-tab-2" data-mdb-tab-init href="#ex1-tabs-2" role="tab" aria-controls="ex1-tabs-2" aria-selected="false">فعال</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="ex1-tab-3" data-mdb-tab-init href="#ex1-tabs-3" role="tab" aria-controls="ex1-tabs-3" aria-selected="false">تکمیل شده</a>
-                            </li>
-                        </ul> *@
-                        <!-- Tabs navs -->
-                        <!-- Tabs content -->
-                        <div class="tab-content" id="ex1-content">
-                            <!-- All Tasks -->
-                            <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                                <ul class="list-group mb-0" id="allTasks">
-                                    @foreach (var item in Model)
-                                    {
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." @(item.IsActive ? "checked" : "") />
-                                            <s>@(item.IsActive ? "" : item.Name)</s> @item.Name - @item.Date
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                            <!-- Active Tasks -->
-                            <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                                <ul class="list-group mb-0" id="activeTasks">
-                                    @foreach (var item in Model.Where(t => t.IsActive))
-                                    {
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked /> @item.Name - @item.Date
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                            <!-- Completed Tasks -->
-                            <div class="tab-pane fade" id="ex1-tabs-3" role="tabpanel" aria-labelledby="ex1-tab-3">
-                                <ul class="list-group mb-0" id="completedTasks">
-                                    @foreach (var item in Model.Where(t => !t.IsActive))
-                                    {
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
-                                            <s>@item.Name</s> - @item.Date
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Tabs content -->
-                    </div>
+<section class="vh-100" style="background-color: #b4bdbf;">
+    <div class="row">
+        <div class="col-md-11 col-12">
+            <div class="card">
+                <div class="header">
+
+                    <form id="addtask">
+                        <input type="text" id="form1" name="name" class="fa" autocomplete="off" />
+                        <button type="submit" class="btn btn-success">افزودن</button>
+                    </form>
+
+                    <div class="clearfix"></div>
+                    <br />
+                    <input type="text" class="form-control" placeholder="جستجو " id="mySearch" />
+                </div>
+                <div class="content table-responsive table-full-width">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr >
+                                <h1 class="text-center">
+                                      لیست وظایف مهم
+                                </h1>
+                             
+                            </tr>
+                        </thead>
+                        <hr />
+                        <tbody id="myTable">
+                            @foreach (var item in Model)
+                            {
+                                <tr id="alltasks">
+                                    <td>
+                                        @if (item.IsActive)
+                                        {
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+
+                                        }
+                                        else
+                                        {
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+
+                                        }
+                                        &nbsp; &nbsp;
+                                       
+
+                                        @item.Name- @item.Date</td>
+
+                                    <td>
+                                        <a href="/Important/Edit/@item.Id" class="btn btn-xs btn-warning">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a href="#" onclick="myDelete('@item.Id')" class="btn btn-xs btn-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+
                 </div>
             </div>
         </div>
     </div>
+
 </section>
 
-
 @section Scripts
-    {
+{
+    <script src="~/js/sweet.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('#createForm').on('submit', function (e) {
+    <script>
+        $(document).ready(function () {
+            $("#mySearch").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script>
+        $('#addtask').on('submit', function (e) {
             e.preventDefault();
-
-            var name = $('#form2').val();
-            var date = $('#formDate').val();
+            var name = $(this).find('#form1').val();
+            var isActive = $(this).find('#isActiveCheck').is(':checked'); 
 
             $.ajax({
                 url: '@Url.Action("Create", "Important")',
                 type: 'POST',
                 data: {
                     name: name,
-                    date: date
+                    isActive: isActive 
                 },
                 success: function (response) {
-                    var newTask = '<li class="list-group-item d-flex align-items-center border-0 mb-2 rounded" style="background-color: #f4f6f7;">' +
-                        '<input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />' +
-                        '<s></s>' + name + ' - ' + date +
-                        '</li>';
+                    console.log(response);
 
-                    $('#allTasks').append(newTask);
+                    var newTask = '<tr>' +
+                        '<td>' + response.IsActive + ' ' + response.Name + ' ' + response.Date + '</td>' +
+                        '<td>' +
+                        '<a href="/Important/Edit/' + response.Id + '" class="btn btn-xs btn-warning">' +
+                        '<i class="fa fa-edit"></i>' +
+                        '</a>' +
+                        '<a href="#" onclick="myDelete(\'' + response.Id + '\')" class="btn btn-xs btn-danger">' +
+                        '<i class="fa fa-trash"></i>' +
+                        '</a>' +
+                        '</td>' +
+                        '</tr>';
 
-                    // Clear the form fields
-                    $('#form2').val('');
-                    $('#formDate').val('');
+                    $('#myTable').append(newTask);
+                    $('#form1').val(''); 
+                    $('#isActiveCheck').prop('checked', false);
+
+                   
                 },
-                error: function (error) {
-                    console.log(error);
-                }
+               
             });
-        });
-    });
-</script>
 
+
+        });
+    </script>
     <script>
         function myDelete(id) {
             swal({
@@ -137,3 +148,5 @@
         }
     </script>
 }
+
+

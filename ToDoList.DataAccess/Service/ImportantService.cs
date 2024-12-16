@@ -12,7 +12,7 @@ using ToDoList.Utility;
 
 namespace ToDoList.DataAccess.Service
 {
-    public class ImportantService: IImportantService
+    public class ImportantService : IImportantService
     {
         private readonly ApplicationDbContext _db;
 
@@ -21,16 +21,24 @@ namespace ToDoList.DataAccess.Service
             _db = db;
         }
 
-        public void AddImportant(Important entity)
+
+        public void AddImportant(ImportantViewModel viewModel)
         {
-            _db.Importants.Add(entity);
+            Important important = new Important()
+            {
+                Date = DateTimeGenerator.GetShamsiDate(),
+                IsActive = false,
+                Name = viewModel.Name,
+                Id = CodeGenerators.GetId()
+            };
+            _db.Importants.Add(important);
             _db.SaveChanges();
         }
 
         public IEnumerable<Important> GetAll()
         {
             IEnumerable<Important> query = _db.Importants;
-            return query.ToList();
+            return query.OrderBy(x => x.Date).ToList();
         }
 
         public Important GetFirstOrDefault(Expression<Func<Important, bool>> filter)
@@ -40,9 +48,9 @@ namespace ToDoList.DataAccess.Service
             return query.FirstOrDefault();
         }
 
-        public void UpdateImportant(Important Important)
+        public void UpdateImportant(Important important)
         {
-            _db.Importants.Update(Important);
+            _db.Importants.Update(important);
             _db.SaveChanges();
         }
 
@@ -52,7 +60,7 @@ namespace ToDoList.DataAccess.Service
             _db.SaveChanges();
         }
 
-       
+
 
     }
 }

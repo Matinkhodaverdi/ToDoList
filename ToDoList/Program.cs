@@ -36,7 +36,7 @@ builder.Services.AddIdentity<Users, IdentityRole>(options =>
 
 builder.Services.AddScoped<IWorkService, WorkService>();
 builder.Services.AddScoped<IImportantService, ImportantService>();
-builder.Services.AddScoped<ITasksService, TasksService>();
+
 
 #endregion
 

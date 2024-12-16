@@ -18,6 +18,6 @@ namespace ToDoList.DataAccess.Data
 
         public DbSet<Work> Works { get; set; }
         public DbSet<Important> Importants { get; set; }
-        public DbSet<Tasks> Taskes { get; set; }
+     
     }
 }

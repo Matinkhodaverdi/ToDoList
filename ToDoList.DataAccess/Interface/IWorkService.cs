@@ -13,7 +13,7 @@ namespace ToDoList.DataAccess.Interface
     public interface IWorkService
     {
        
-        void AddWork(Work entity);
+        void AddWork(WorkViewModel viewModel);
         IEnumerable<Work> GetAll();
         Work GetFirstOrDefault(Expression<Func<Work, bool>> filter);
         void UpdateWork(Work work);

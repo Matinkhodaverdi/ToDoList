@@ -23,16 +23,23 @@ namespace ToDoList.DataAccess.Service
         }
 
       
-        public void AddWork(Work entity)
+        public void AddWork(WorkViewModel viewModel)
         {
-            _db.Works.Add(entity);
+            Work work = new Work()
+            {
+                Date = DateTimeGenerator.GetShamsiDate(),
+                IsActive = false,
+                Name = viewModel.Name,
+                Id = CodeGenerators.GetId()
+            };
+            _db.Works.Add(work);
             _db.SaveChanges();
         }
 
         public IEnumerable<Work> GetAll()
         {
            IEnumerable<Work> query = _db.Works;
-            return query.ToList();
+            return query.OrderBy(x=> x.Date).ToList();
         }
 
         public Work GetFirstOrDefault(Expression<Func<Work, bool>> filter)

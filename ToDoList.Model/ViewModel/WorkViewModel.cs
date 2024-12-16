@@ -8,8 +8,7 @@ namespace ToDoList.Model.ViewModel
 {
     public class WorkViewModel
     {
-        public string Name { get; set; }
-        public bool Star { get; set; }
+        public string Name { get; set; }       
         public bool IsActive { get; set; }
 
     }

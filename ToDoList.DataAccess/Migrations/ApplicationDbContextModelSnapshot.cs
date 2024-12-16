@@ -177,26 +177,6 @@ namespace ToDoList.DataAccess.Migrations
                     b.ToTable("Importants");
                 });
 
-            modelBuilder.Entity("ToDoList.Model.Models.Tasks", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Done")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Taskes");
-                });
-
             modelBuilder.Entity("ToDoList.Model.Models.Users", b =>
                 {
                     b.Property<string>("Id")

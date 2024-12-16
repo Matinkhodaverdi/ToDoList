@@ -9,7 +9,7 @@ namespace ToDoList.Controllers
     public class WorkController : Controller
     {
         private readonly IWorkService _workService;
-        private PersianCalendar pc = new PersianCalendar();
+       
 
         public WorkController(IWorkService workService)
         {
@@ -29,18 +29,31 @@ namespace ToDoList.Controllers
 
 
         [HttpPost]
-        public IActionResult Create(Work obj)
+        public IActionResult Create(WorkViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _workService.AddWork(obj);
+                _workService.AddWork(viewModel);
                 return RedirectToAction("Index");
             }
-            return View(obj);
+            return View(viewModel);
         }
 
+        public IActionResult Edit(Guid? id)
+        {
+            if (id == Guid.Empty)
+            {
+                return NotFound();
+            }
+            var WorkFromDbFirst = _workService.GetFirstOrDefault(x => x.Id == id);
+            if (WorkFromDbFirst == null)
+            {
+                return NotFound();
+            }
 
-      
+            return View(WorkFromDbFirst);
+        }
+
 
         [HttpPost]
         public IActionResult Edit(Work obj)

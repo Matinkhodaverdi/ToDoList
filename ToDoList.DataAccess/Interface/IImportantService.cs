@@ -11,11 +11,11 @@ namespace ToDoList.DataAccess.Interface
 {
     public interface IImportantService
     {
-        void AddImportant(Important entity);
+        void AddImportant(ImportantViewModel viewModel);
         IEnumerable<Important> GetAll();
         Important GetFirstOrDefault(Expression<Func<Important, bool>> filter);
         void UpdateImportant(Important Important);
         void Remove(Important entity);
-        
+
     }
 }

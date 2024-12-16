@@ -36,15 +36,16 @@
     <link rel="stylesheet" href="~/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     @* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> *@
     <link href="~/AdminLTE/style/style.css" rel="stylesheet" />
-  @*   <!--     Fonts and icons     -->
+    <!--     Fonts and icons     -->
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/earlyaccess/droidarabickufi.css' rel='stylesheet' type='text/css'> *@
- @*    <link href="~/css/dashboard/pe-icon-7-stroke.css" rel="stylesheet" /> *@
+    <link href='http://fonts.googleapis.com/earlyaccess/droidarabickufi.css' rel='stylesheet' type='text/css'>
+   <link href="~/css/dashboard/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  
     <link href="~/css/style.css" rel="stylesheet" />
-   
+  
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
@@ -96,7 +97,7 @@
 
                         </li>
                         <li class="nav-item @(ViewData["ActiveMenu"] == "Work" ? "active" : "")">
-                            <a asp-controller="Tasks" asp-action="Index" class="nav-link">
+                            <a asp-controller="Work" asp-action="Index" class="nav-link">
                                 <i class="nav-icon fas fa-home"></i>
                                 <p>
                                     کارمن
@@ -115,16 +116,6 @@
                         </li>
                       
                        
-                        
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="nav-icon fas fa-check"></i>
-                                <p>
-                                      انجام شده ها
-
-                                </p>
-                            </a>
-                        </li>
                       
                        
                     </ul>

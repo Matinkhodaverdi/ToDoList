@@ -12,7 +12,7 @@ namespace ToDoList.Model.Models
         [Key]
         public Guid Id { get; set; }
 
-        [Display(Name = "کارمهم")]
+        [Display(Name = "کار")]
         public string Name { get; set; }
 
         [Display(Name = "تاریخ")]
@@ -20,8 +20,6 @@ namespace ToDoList.Model.Models
 
         [Display(Name = "فعال/غیرفعال")]
         public bool IsActive { get; set; }
-
-       
 
     }
 }
