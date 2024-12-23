@@ -7,12 +7,12 @@ using ToDoList.Model.ViewModel;
 namespace ToDoList.Controllers
 {
     public class ImportantController : Controller
-    {     
+    {
         private readonly IImportantService _importantService;
 
         public ImportantController(IImportantService importantService)
         {
-      
+
             _importantService = importantService;
         }
 

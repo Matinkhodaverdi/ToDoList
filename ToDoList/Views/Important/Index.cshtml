@@ -8,7 +8,7 @@
 
 
 
-<section class="vh-100" style="background-color: #b4bdbf;">
+<section class="vh-100" style="background-color: #ecc6d9">
     <div class="row">
         <div class="col-md-11 col-12">
             <div class="card">
@@ -26,11 +26,11 @@
                 <div class="content table-responsive table-full-width">
                     <table class="table table-hover table-striped">
                         <thead>
-                            <tr >
+                            <tr>
                                 <h1 class="text-center">
-                                      لیست وظایف مهم
+                                    لیست وظایف مهم
                                 </h1>
-                             
+
                             </tr>
                         </thead>
                         <hr />
@@ -50,9 +50,10 @@
 
                                         }
                                         &nbsp; &nbsp;
-                                       
 
-                                        @item.Name- @item.Date</td>
+
+                                        @item.Name- @item.Date
+                                    </td>
 
                                     <td>
                                         <a href="/Important/Edit/@item.Id" class="btn btn-xs btn-warning">
@@ -95,14 +96,14 @@
         $('#addtask').on('submit', function (e) {
             e.preventDefault();
             var name = $(this).find('#form1').val();
-            var isActive = $(this).find('#isActiveCheck').is(':checked'); 
+            var isActive = $(this).find('#isActiveCheck').is(':checked');
 
             $.ajax({
                 url: '@Url.Action("Create", "Important")',
                 type: 'POST',
                 data: {
                     name: name,
-                    isActive: isActive 
+                    isActive: isActive
                 },
                 success: function (response) {
                     console.log(response);
@@ -120,12 +121,12 @@
                         '</tr>';
 
                     $('#myTable').append(newTask);
-                    $('#form1').val(''); 
+                    $('#form1').val('');
                     $('#isActiveCheck').prop('checked', false);
 
-                   
+
                 },
-               
+
             });
 
 
@@ -148,5 +149,4 @@
         }
     </script>
 }
-
 

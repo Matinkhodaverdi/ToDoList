@@ -22,7 +22,7 @@ namespace ToDoList.DataAccess.Service
             _db = db;
         }
 
-      
+
         public void AddWork(WorkViewModel viewModel)
         {
             Work work = new Work()
@@ -34,6 +34,7 @@ namespace ToDoList.DataAccess.Service
             };
             _db.Works.Add(work);
             _db.SaveChanges();
+            
         }
 
         public IEnumerable<Work> GetAll()
@@ -61,7 +62,6 @@ namespace ToDoList.DataAccess.Service
             _db.SaveChanges();
         }
 
-      
       
     }
 }

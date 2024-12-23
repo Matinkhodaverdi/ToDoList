@@ -9,7 +9,7 @@ namespace ToDoList.Controllers
     public class WorkController : Controller
     {
         private readonly IWorkService _workService;
-       
+
 
         public WorkController(IWorkService workService)
         {
